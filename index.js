@@ -1,4 +1,5 @@
-var midi = require( 'midi' );
+var midi = require( 'midi' ),
+	Shifty = require('shifty');
 
 // Set up a new output. 
 var output = new midi.output();
@@ -91,19 +92,23 @@ metronome.onBeat( function ( beat ) {
 
     } )
 
-    // if ( beat === 0 ) {
-
-    // 	output.sendMessage([144, 64, 127]);
-
-    // } else if ( beat === 1 ) {
-
-    // 	output.sendMessage([128, 64, 127]);
-
-    // }
-
 } );
 
+controlTween = new Shifty();
 
+controlTween.tween({
+  from:     {val: 0},
+  to:       {val: 127},
+  duration: 12000,
+  easing: 'easeOutCubic',
+  step: function (state) {
+    console.log(Math.round(state.val));
+    output.sendMessage( [ 176, 10, Math.round(state.val)] );
+  },
+  finish: function (state) {
+    console.log('Hooray, all done!  Final value: ' + state.val);
+  }
+});
 
 // Close the port when done. 
 // output.closePort();

@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "midi": "^0.9.1"
+    "midi": "^0.9.1",
+    "shifty": "^1.3.10"
   }
 }
