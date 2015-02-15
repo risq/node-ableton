@@ -102,7 +102,6 @@ controlTween.tween({
   duration: 12000,
   easing: 'easeOutCubic',
   step: function (state) {
-    console.log(Math.round(state.val));
     output.sendMessage( [ 176, 10, Math.round(state.val)] );
   },
   finish: function (state) {
